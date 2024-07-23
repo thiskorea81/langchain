@@ -1,4 +1,4 @@
-from PyPDF2 import PdfFileReader
+# from PyPDF2 import PdfFileReader
 from PyPDF2 import PdfReader
 import streamlit as st
 from langchain.text_splitter import CharacterTextSplitter
