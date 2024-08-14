@@ -3,7 +3,8 @@
 import streamlit as st
 from streamlit_chat import message
 # from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain_community.embeddings import OpenAIEmbeddings
+# from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 # from langchain.chat_models import ChatOpenAI
 from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
@@ -37,7 +38,7 @@ if uploaded_file :
     chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,model_name='gpt-4'), retriever=vectors.as_retriever())
 
     def conversational_chat(query):  #문맥 유지를 위해 과거 대화 저장 이력에 대한 처리      
-        result = chain({"question": query, "chat_history": st.session_state['history']})
+        result = chain.invoke({"question": query, "chat_history": st.session_state['history']})
         st.session_state['history'].append((query, result["answer"]))        
         return result["answer"]
     
