@@ -41,7 +41,7 @@ if uploaded_file :
     chain = ConversationalRetrievalChain.from_llm(llm = llm, retriever=vectors.as_retriever())
 
     def conversational_chat(query):  #문맥 유지를 위해 과거 대화 저장 이력에 대한 처리      
-        result = chain({"question": query, "chat_history": st.session_state['history']})
+        result = chain.invoke({"question": query, "chat_history": st.session_state['history']})
         st.session_state['history'].append((query, result["answer"]))        
         return result["answer"]
     
